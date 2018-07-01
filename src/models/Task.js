@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     titulo: DataTypes.STRING,
     descricao: DataTypes.TEXT,
     concluido: DataTypes.BOOLEAN
-  });
+  })
 
-  return Task;
-} 
+  return Task
+}
