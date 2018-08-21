@@ -1,4 +1,8 @@
 module.exports = {
+  jwtSecret: process.env.JWT_SECRET || 'MyS3cr3tK3Y',
+  jwtSession: {
+    session: false
+  },
   port: process.env.PORT || 3000,
   db: {
     database: process.env.DB_NAME || 'task',

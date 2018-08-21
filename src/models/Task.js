@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
-    titulo: DataTypes.STRING,
-    descricao: DataTypes.TEXT,
-    concluido: DataTypes.BOOLEAN
+    title: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    finished: DataTypes.BOOLEAN
   })
 
   return Task
