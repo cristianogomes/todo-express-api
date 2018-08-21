@@ -21,7 +21,6 @@ module.exports = () => {
     if (user) {
       return done(null, {id: user.id})
     }
-
     return done(new Error('User not found'), null)
   })
 
