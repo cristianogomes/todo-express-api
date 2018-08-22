@@ -1,0 +1,54 @@
+#Listar tasks
+GET http://127.0.0.1:3000/task HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkNyaXN0aWFubyIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQwOCRLREpoaGpreW5tREE2T2U2S0RZUGkuUGQ5aDZnMjBZWEJBSUNYTC5PdTcxMVFkd2FjM2pwcSIsImNyZWF0ZWRBdCI6IjIwMTgtMDgtMjJUMDI6MzM6MTMuODEzWiIsInVwZGF0ZWRBdCI6IjIwMTgtMDgtMjJUMDI6MzM6MTMuODEzWiIsImlhdCI6MTUzNDkxMDE2NiwiZXhwIjoxNTM1NTE0OTY2fQ.kIYh5jk1gMt5RD0eaQg6zfDMOwxlzKHAHry401_REp0
+
+###
+
+#Criar task
+POST http://127.0.0.1:3000/task HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Titulo da tarefa",
+  "description": "Descrição da tarefa",
+  "finished": false
+}
+
+###
+
+#Editar task
+PUT http://127.0.0.1:3000/task/1 HTTP/1.1
+content-type: application/json
+
+{
+	"finished" : true
+}
+
+###
+
+#Delete Task
+DELETE http://127.0.0.1:3000/task/1 HTTP/1.1
+
+###
+
+#Registrar usuario
+POST http://127.0.0.1:3000/register HTTP/1.1
+content-type: application/json
+
+{
+	"name": "Cristiano",
+	"email": "admin@mail.com",
+	"password": "123456"
+}
+
+###
+
+#Logar usuario
+POST http://127.0.0.1:3000/login HTTP/1.1
+content-type: application/json
+
+{
+	"email": "admin@mail.com",
+	"password": "123456"
+}

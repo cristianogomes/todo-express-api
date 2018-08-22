@@ -1,9 +1,7 @@
 const passport = require('passport')
-const passportJwt = require('passport-jwt')
+const { ExtractJwt, Strategy } = require('passport-jwt')
 const { User } = require('../models')
 const config = require('../config/config')
-const ExtractJwt = passportJwt.ExtractJwt
-const Strategy = passportJwt.Strategy
 
 const params = {
   secretOrKey: config.jwtSecret,
@@ -11,17 +9,19 @@ const params = {
 }
 
 module.exports = () => {
-  const strategy = new Strategy(params, (payload, done) => {
-    const user = User.findOne({
+  const strategy = new Strategy(params, async (payload, done) => {
+    const user = await User.findOne({
       where: {
-        email: payload.email
+        email: payload.email,
+        password: payload.password
       }
     })
 
     if (user) {
       return done(null, {id: user.id})
     }
-    return done(new Error('User not found'), null)
+
+    return done(null)
   })
 
   passport.use(strategy)
