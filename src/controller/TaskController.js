@@ -1,16 +1,32 @@
 const { Task } = require('../models')
 
 module.exports = {
-  async index (req, res) {
+  async list (req, res) {
     try {
       const tasks = await Task.findAll({
-        limit: 10
+        limit: 50
       })
 
       res.send(tasks)
     } catch (err) {
       res.status(500).send({
         mensagem: 'Erro ao listar'
+      })
+    }
+  },
+
+  async get (req, res) {
+    try {
+      const task = await Task.findOne({
+        where: {
+          id: req.params.id
+        }
+      })
+
+      res.send(task)
+    } catch (err) {
+      res.status(500).send({
+        mensagem: 'Erro ao recuperar'
       })
     }
   },
@@ -29,13 +45,13 @@ module.exports = {
 
   async put (req, res) {
     try {
-      await Task.update(req.body, {
+      const countUpdate = await Task.update(req.body, {
         where: {
           id: req.params.id
         }
       })
 
-      res.send(req.body)
+      res.send(countUpdate)
     } catch (err) {
       res.status(500).send({
         mensagem: 'Erro ao atualizar'

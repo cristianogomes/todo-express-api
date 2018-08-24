@@ -1,9 +1,12 @@
 const TaskController = require('./controller/TaskController')
 const AuthController = require('./controller/AuthController')
-const Auth = require('./controller/Auth')()
+const Auth = require('./middleware/Auth')()
 
 module.exports = (app) => {
-  app.get('/task', Auth.authenticate(), TaskController.index)
+  app.use('/task', Auth.authenticate())
+
+  app.get('/task', TaskController.list)
+  app.get('/task/:id', TaskController.get)
   app.post('/task', TaskController.post)
   app.put('/task/:id', TaskController.put)
   app.delete('/task/:id', TaskController.delete)

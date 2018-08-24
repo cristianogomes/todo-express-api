@@ -1,16 +1,30 @@
+@baseUrl = http://127.0.0.1:3000
+@contentType = application/json
+
 #Listar tasks
-GET http://127.0.0.1:3000/task HTTP/1.1
-content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkNyaXN0aWFubyIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQwOCRLREpoaGpreW5tREE2T2U2S0RZUGkuUGQ5aDZnMjBZWEJBSUNYTC5PdTcxMVFkd2FjM2pwcSIsImNyZWF0ZWRBdCI6IjIwMTgtMDgtMjJUMDI6MzM6MTMuODEzWiIsInVwZGF0ZWRBdCI6IjIwMTgtMDgtMjJUMDI6MzM6MTMuODEzWiIsImlhdCI6MTUzNDkxMDE2NiwiZXhwIjoxNTM1NTE0OTY2fQ.kIYh5jk1gMt5RD0eaQg6zfDMOwxlzKHAHry401_REp0
+GET {{baseUrl}}/task HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{login.response.body.token}}
+Origin: http://127.0.0.1:3000
+
+###
+
+#Recuperar tasks
+GET {{baseUrl}}/task/1 HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{login.response.body.token}}
+Origin: http://127.0.0.1:3000
 
 ###
 
 #Criar task
-POST http://127.0.0.1:3000/task HTTP/1.1
-content-type: application/json
+POST {{baseUrl}}/task HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{login.response.body.token}}
+Origin: http://127.0.0.1:3000
 
 {
-  "title": "Titulo da tarefa",
+  "title": "Titulo da tarefa {{$timestamp}}",
   "description": "Descrição da tarefa",
   "finished": false
 }
@@ -18,23 +32,30 @@ content-type: application/json
 ###
 
 #Editar task
-PUT http://127.0.0.1:3000/task/1 HTTP/1.1
-content-type: application/json
+PUT {{baseUrl}}/task/2 HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{login.response.body.token}}
+Origin: http://127.0.0.1:3000
 
 {
+  "title": "Titulo da tarefa alterado",
+  "description": "Descrição da tarefa alterada",
 	"finished" : true
 }
 
 ###
 
 #Delete Task
-DELETE http://127.0.0.1:3000/task/1 HTTP/1.1
+DELETE {{baseUrl}}/task/2 HTTP/1.1
+Authorization: Bearer {{login.response.body.token}}
+Origin: http://127.0.0.1:3000
 
 ###
 
 #Registrar usuario
-POST http://127.0.0.1:3000/register HTTP/1.1
-content-type: application/json
+POST {{baseUrl}}/register HTTP/1.1
+Content-Type: {{contentType}}
+Origin: http://127.0.0.1:3000
 
 {
 	"name": "Cristiano",
@@ -45,8 +66,10 @@ content-type: application/json
 ###
 
 #Logar usuario
-POST http://127.0.0.1:3000/login HTTP/1.1
-content-type: application/json
+# @name login
+POST {{baseUrl}}/login HTTP/1.1
+Content-Type: {{contentType}}
+Origin: http://127.0.0.1:3000
 
 {
 	"email": "admin@mail.com",
