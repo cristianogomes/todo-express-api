@@ -5,5 +5,15 @@ module.exports = (sequelize, DataTypes) => {
     finished: DataTypes.BOOLEAN
   })
 
+  Task.associate = (models) => {
+    models.Task.belongsTo(models.User, {
+      onDelete: 'CASCADE',
+      foreignKey: {
+        fieldName: 'id_user',
+        allowNull: true
+      }
+    })
+  }
+
   return Task
 }

@@ -4,6 +4,9 @@ module.exports = {
   async list (req, res) {
     try {
       const tasks = await Task.findAll({
+        where: {
+          id_user: req.user.id
+        },
         limit: 50
       })
 
@@ -19,7 +22,8 @@ module.exports = {
     try {
       const task = await Task.findOne({
         where: {
-          id: req.params.id
+          id: req.params.id,
+          id_user: req.user.id
         }
       })
 
@@ -33,6 +37,7 @@ module.exports = {
 
   async post (req, res) {
     try {
+      req.body.id_user = req.user.id
       const task = await Task.create(req.body)
 
       res.send(task)
@@ -47,7 +52,8 @@ module.exports = {
     try {
       const countUpdate = await Task.update(req.body, {
         where: {
-          id: req.params.id
+          id: req.params.id,
+          id_user: req.user.id
         }
       })
 
@@ -63,7 +69,8 @@ module.exports = {
     try {
       const task = await Task.findOne({
         where: {
-          id: req.params.id
+          id: req.params.id,
+          id_user: req.user.id
         }
       })
 

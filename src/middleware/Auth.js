@@ -18,7 +18,7 @@ module.exports = () => {
     })
 
     if (user) {
-      return done(null, {id: user.id})
+      return done(null, user)
     }
 
     return done(null)
