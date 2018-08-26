@@ -7,14 +7,17 @@ const validateTask = Joi.object().keys({
   finished: Joi.boolean().required()
 })
 
-const schemas = {
-  '/task': {
-    'post': validateTask
-  },
+const validateUser = Joi.object().keys({
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+  name: Joi.string().min(3).max(20).required(),
+  password: Joi.string().min(6).max(20).required()
+})
 
-  '/task/:id': {
-    'put': validateTask
-  }
+const schemas = {
+  '/task': { 'post': validateTask },
+  '/task/:id': { 'put': validateTask },
+
+  '/register': { 'post': validateUser }
 }
 
 module.exports = {

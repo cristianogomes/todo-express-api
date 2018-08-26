@@ -12,8 +12,8 @@ module.exports = () => {
   const strategy = new Strategy(params, async (payload, done) => {
     const user = await User.findOne({
       where: {
-        email: payload.email,
-        password: payload.password
+        id: payload.id,
+        email: payload.email
       }
     })
 

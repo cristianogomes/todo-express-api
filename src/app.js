@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const config = require('./config/config')
 const { sequelize } = require('./models')
 const auth = require('./middleware/Auth')()
-const JoiValidator = require('./middleware/JoiValidator')
+const ErrorHandler = require('./middleware/ErrorHandler')
 
 const app = express()
 
@@ -26,9 +26,10 @@ app.use(helmet())
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(auth.initialize())
-app.use(JoiValidator())
 
 require('./routes')(app)
+
+app.use(ErrorHandler())
 
 sequelize.sync(/* {force: true} */).then(() => {
   app.listen(config.port)

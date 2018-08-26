@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const validations = require('../validations')
+const { UnprocessableEntity } = require('rest-api-errors')
 
 module.exports = () => {
   return (req, res, next) => {
@@ -11,13 +12,11 @@ module.exports = () => {
     if (schemaValidation) {
       Joi.validate(req.body, schemaValidation, (err) => {
         if (err) {
-          res.status(404).send(err.details)
-        } else {
-          next()
+          throw new UnprocessableEntity(null, err.details[0].message)
         }
       })
-    } else {
-      next()
     }
+
+    return next()
   }
 }

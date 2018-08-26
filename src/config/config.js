@@ -3,6 +3,7 @@ module.exports = {
   jwtSession: {
     session: false
   },
+  expiresIn: 60 * 60 * 24 * 7,
   port: process.env.PORT || 3000,
   db: {
     database: process.env.DB_NAME || 'task',

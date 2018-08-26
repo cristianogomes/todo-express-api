@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      unique: true
+      unique: {
+        msg: 'Esse email já está sendo utilizado'
+      }
     },
     password: DataTypes.STRING
   }, {
@@ -36,6 +38,13 @@ module.exports = (sequelize, DataTypes) => {
 
   User.prototype.comparePassword = function (password) {
     return bcrypt.compareSync(password, this.password)
+  }
+
+  User.prototype.toJSON = function () {
+    const values = Object.assign({}, this.get())
+    delete values.password
+
+    return values
   }
 
   return User
