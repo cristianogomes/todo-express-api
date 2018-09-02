@@ -1,7 +1,7 @@
-const { User } = require('../models')
 const jwt = require('jsonwebtoken')
-const config = require('../config/config')
 const { Forbidden } = require('rest-api-errors')
+const { User } = require('../models')
+const config = require('../config/config')
 
 const jwtSignUser = (user) => {
   return jwt.sign(user, config.jwtSecret, {

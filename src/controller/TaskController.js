@@ -1,3 +1,4 @@
+const { NotFound } = require('rest-api-errors')
 const { Task } = require('../models')
 
 module.exports = {
@@ -19,6 +20,10 @@ module.exports = {
         id_user: req.user.id
       }
     })
+
+    if (!task) {
+      throw new NotFound(null, 'Task não encontrada')
+    }
 
     return res.send(task)
   },
@@ -48,6 +53,10 @@ module.exports = {
         id_user: req.user.id
       }
     })
+
+    if (!task) {
+      throw new NotFound(null, 'Task não encontrada')
+    }
 
     await task.destroy()
 
